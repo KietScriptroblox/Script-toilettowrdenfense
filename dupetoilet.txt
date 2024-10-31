@@ -1,0 +1,61 @@
+local player = game.Players.LocalPlayer
+local screenGui = Instance.new("ScreenGui")
+local openButton = Instance.new("TextButton")
+local frame = Instance.new("Frame")
+local titleLabel = Instance.new("TextLabel")
+local dupeCoinButton = Instance.new("TextButton")
+local gemsTextBox = Instance.new("TextBox")
+local confirmButton = Instance.new("TextButton")
+
+screenGui.Parent = player:WaitForChild("PlayerGui")
+
+openButton.Size = UDim2.new(0, 200, 0, 50)
+openButton.Position = UDim2.new(0.5, -100, 0.5, -25)
+openButton.Text = "Open Menu"
+openButton.Parent = screenGui
+
+frame.Size = UDim2.new(0, 300, 0, 250)
+frame.Position = UDim2.new(0.5, -150, 0.5, -125)
+frame.Visible = false
+frame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+frame.Parent = screenGui
+
+titleLabel.Size = UDim2.new(1, 0, 0, 50)
+titleLabel.Position = UDim2.new(0, 0, 0, 0)
+titleLabel.Text = "Kiet-Script"
+titleLabel.TextSize = 28
+titleLabel.Parent = frame
+
+dupeCoinButton.Size = UDim2.new(0.8, 0, 0, 50)
+dupeCoinButton.Position = UDim2.new(0.1, 0, 0.3, 0)
+dupeCoinButton.Text = "Dupe Coin"
+dupeCoinButton.Parent = frame
+
+gemsTextBox.Size = UDim2.new(0.8, 0, 0, 50)
+gemsTextBox.Position = UDim2.new(0.1, 0, 0.5, 0)
+gemsTextBox.PlaceholderText = "Nhập số Gems"
+gemsTextBox.Parent = frame
+
+confirmButton.Size = UDim2.new(0.4, 0, 0, 50)
+confirmButton.Position = UDim2.new(0.3, 0, 0.7, 0)
+confirmButton.Text = "Xác Nhận"
+confirmButton.Parent = frame
+
+openButton.MouseButton1Click:Connect(function()
+    frame.Visible = not frame.Visible
+end)
+
+dupeCoinButton.MouseButton1Click:Connect(function()
+    print("Người chơi đã nhận Dupe Coin!")
+end)
+
+confirmButton.MouseButton1Click:Connect(function()
+    local gems = tonumber(gemsTextBox.Text)
+    if gems then
+        player.Gems.Value = player.Gems.Value + gems
+        print("Người chơi đã nhận " .. gems .. " Gems!")
+        gemsTextBox.Text = ""
+    else
+        print("Vui lòng nhập số hợp lệ!")
+    end
+end)
